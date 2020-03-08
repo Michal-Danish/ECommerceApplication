@@ -1,0 +1,55 @@
+﻿@using ECommerce.Data;
+@model IEnumerable<ShoppingCartProducts>;
+
+@{decimal total = 0;}
+<h1>Cart:</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+    </tr>
+    @foreach (ShoppingCartProducts scp in @Model)
+    {
+        <tr>
+            <td>
+                <img src="~/uploads/@scp.Product.ImageFileName" style="width: 200px" />
+            </td>
+            <td>@scp.Product.Name</td>
+            <td>@scp.Product.Price.ToString("C")</td>
+            <td>
+                <form method="post" action="/home/updatecart">
+                    <input type="hidden" name="productId" value="@scp.ProductId" />
+                    <input type="hidden" name="shoppingId" value="@scp.ShoppingCartId" />
+                    <input type="text" name="quantity" value="@scp.Quantity" />
+                    <br />
+                    <br />
+                    <button class="btn btn-primary">Update Quantity</button>
+                </form>
+                <br />
+                <br />
+                <form method="post" action="/home/delete">
+                    <input type="hidden" name="productId" value="@scp.ProductId" />
+                    <input type="hidden" name="shoppingId" value="@scp.ShoppingCartId" />
+                    <button class="btn btn-danger" id="remove">Remove from Cart</button>
+                </form>
+            </td>
+            <td>@((@scp.Product.Price * @scp.Quantity).ToString("C"))</td>
+        </tr>
+        @(total += (@scp.Product.Price * @scp.Quantity))
+    }
+</table>
+<br />
+@{ if (total != 0)
+    {
+        <form method="post" action="/home/placeorder">
+            <input type="hidden" name="total" value="@total" />
+            <button class="btn btn-warning" style="font-size: 20px">Place Order</button>
+        </form>
+    }
+}
+<br />
+<br />
+<a href="/home/index" style="font-size: 20px">Keep Shopping</a>

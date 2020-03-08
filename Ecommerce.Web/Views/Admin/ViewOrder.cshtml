@@ -1,0 +1,47 @@
+﻿@using ECommerce.Data;
+@model Order;
+
+
+<h1>Order Number @Model.Id</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+    </tr>
+    @foreach (ShoppingCartProducts scp in @Model.ShoppingCart.ShoppingCartProducts)
+    {
+        <tr>
+            <td>
+                <img src="~/uploads/@scp.Product.ImageFileName" style="width: 200px" />
+            </td>
+            <td>@scp.Product.Name</td>
+            <td>@scp.Product.Price.ToString("C")</td>
+            <td>@scp.Quantity</td>
+            <td>@((@scp.Product.Price * @scp.Quantity).ToString("C"))</td>
+        </tr>
+    }
+</table>
+<br />
+<h3>SHIP TO:</h3>
+<h5>@Model.FirstName @Model.LastName</h5>
+<h5>@Model.Address</h5>
+<h5>@Model.City, @Model.State @Model.Zip</h5>
+<br />
+<h3>BILL:</h3>
+<h5>@Model.NameOnCard</h5>
+<h5>@Model.CardNumber</h5>
+<h5>Expiration: @Model.Expiration</h5>
+<h5>Security Code: @Model.SecurityCode</h5>
+<br />
+<h3>ORDER TOTAL:</h3>
+<h5>@Model.OrderTotal.ToString("C")</h5>
+<br />
+<br />
+<form method="post" action="/admin/fillorder?orderId=@Model.Id">
+    <button class="btn btn-primary">Complete Order</button>
+</form>
+

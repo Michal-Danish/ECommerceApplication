@@ -1,0 +1,27 @@
+﻿@using ECommerce.Data;
+@model IEnumerable<Order>;
+
+
+<h1>Orders:</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Order Number</th>
+        <th>Order Total</th>
+        <th>Fill Order</th>
+    </tr>
+    @foreach (Order o in @Model)
+    {
+        <tr id="@o.Id">
+            <td>@o.Id</td>
+            <td>@o.OrderTotal.ToString("C")</td>
+            <td>
+                <form method="post" action="/admin/vieworder?orderid=@o.Id">
+                    <button class="btn btn-danger" id="vieworder" data-id="@o.Id">Fill Order</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+

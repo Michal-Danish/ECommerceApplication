@@ -1,0 +1,39 @@
+﻿@model int;
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+        <h3>Shipping Information:</h3>
+        <br />
+        <form method="post" action="/home/addorder">
+            <input type="hidden" name="shoppingcartid" value="@Model" />
+            <input type="text" name="firstname" placeholder="First Name" class="form-control" />
+            <br />
+            <input type="text" name="lastname" placeholder="Last Name" class="form-control" />
+            <br />
+            <input type="text" name="address" placeholder="Address" class="form-control" />
+            <br />
+            <input type="text" name="city" placeholder="City" class="form-control" />
+            <br />
+            <input type="text" name="state" placeholder="State" class="form-control" />
+            <br />
+            <input type="text" name="zip" placeholder="zip" class="form-control" />
+            <br />
+            <h3>Payment Information:</h3>
+            <br />
+            <input type="text" name="nameoncard" placeholder="Name on Card" class="form-control" />
+            <br />
+            <input type="text" name="cardnumber" placeholder="Card Number" class="form-control" />
+            <br />
+            <input type="text" name="expiration" placeholder="Expiration" class="form-control" />
+            <br />
+            <input type="text" name="securitycode" placeholder="Security Code" class="form-control" />
+            <input type="hidden" name="filled" value="false" />
+            <br />
+            <br />
+            <button class="btn btn-primary">Place Order</button>
+        </form>
+        <br />
+    </div>
+</div>
+
+

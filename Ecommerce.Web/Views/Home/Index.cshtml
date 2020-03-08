@@ -1,0 +1,20 @@
+﻿@using ECommerce.Data;
+@model IEnumerable<Category>;
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+        <h1>Choose a Category:</h1>
+        <br />
+        @foreach (Category c in @Model)
+        {
+            <div class="container">
+                <form method="post" action="/home/productsofcategory?catid=@c.Id">
+                    <button class="btn btn-warning">@c.Name</button>
+                </form>
+            </div>
+            <br />
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,33 @@
+﻿@using ECommerce.Data;
+@model ProductsViewModel;
+
+
+<h1>Products in Category @Model.CategoryName:</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>View Product</th>
+    </tr>
+    @foreach(Product p in @Model.Products)
+    {
+        <tr>
+            <td>
+                <img src="~/uploads/@p.ImageFileName" style="width: 200px"/>
+            </td>
+            <td>@p.Name</td>
+            <td>@p.Price.ToString("C")</td>
+            <td>
+                <form method="post" action="/home/individualproduct?proid=@p.Id">
+                    <button class="btn btn-danger">View Product</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
